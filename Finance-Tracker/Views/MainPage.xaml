@@ -1,0 +1,21 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Finance_Tracker.Views.MainPage">
+    <StackLayout Padding="20">
+        <Label Text="Expense/Income Dashboard" FontSize="24" HorizontalOptions="Center" />
+
+        <ListView x:Name="expensesListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical" Padding="10">
+                            <Label Text="{Binding Amount}" FontSize="16" />
+                            <Label Text="{Binding Description, StringFormat='Description: {0}'}" FontSize="14" />
+                            <Label Text="{Binding Time, StringFormat='Time: {0:dd/MM/yyyy}'}" FontSize="14" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
