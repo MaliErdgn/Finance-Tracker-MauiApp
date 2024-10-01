@@ -1,8 +1,10 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Finance_Tracker.Views.MainPage">
+             x:Class="Finance_Tracker.Views.MainPage"
+             Shell.NavBarIsVisible="False">
     <Grid Padding="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -11,21 +13,160 @@
                FontSize="24"
                HorizontalOptions="Center" />
 
+
+        <Entry Grid.Row="1"
+               Placeholder="Search"
+               TextChanged="Entry_TextChanged"
+               Margin="0,20,0,0"></Entry>
+
         <CollectionView x:Name="expensesCollectionView"
                         SelectionMode="Single"
                         SelectionChanged="expensesCollectionView_SelectionChanged"
-                        Grid.Row="1">
+                        Grid.Row="3"
+                        Margin="0,20,0,0">
+            <CollectionView.Header>
+                <Grid ColumnSpacing="20"
+                      Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" /> <!--Type-->
+                        <ColumnDefinition Width="120" /> <!--Amount-->
+                        <ColumnDefinition Width="120" /> <!--Date-->
+                        <ColumnDefinition Width="120" /> <!--Category-->
+                        <ColumnDefinition Width="120" /> <!--Tag-->
+                        <ColumnDefinition Width="120" /> <!--Method-->
+                        <ColumnDefinition Width="*" /> <!--Description-->
+                    </Grid.ColumnDefinitions>
+
+                    <!--Type Header--> 
+                    <Grid Grid.Column="0">
+                        <Label Text="Type"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTypeHeaderTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    <!--Amount Header-->
+                    <Grid Grid.Column="1">
+                        <Label Text="Amount"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAmountHeaderTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    <!--Date Header-->
+                    <Grid Grid.Column="2">
+                        <Label Text="Date"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDateHeaderTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    <!-- Category Header -->
+                    <Grid Grid.Column="3">
+                        <Label Text="Category"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCategoryHeaderTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    
+                    <!-- Tag Header -->
+                    <Grid Grid.Column="4">
+                        <Label Text="Tag"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnTagHeaderTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    
+                    <!-- Method Header -->
+                    <Grid Grid.Column="5">
+                        <Label Text="Method"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMethodHeaderTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    
+                    
+                    <!-- Description Header -->
+                    <Grid Grid.Column="6">
+                        <Label Text="Description"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDescriptionHeaderTapped" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Grid>
+            </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Vertical"
-                                 Padding="10">
+                    <Grid ColumnSpacing="20"
+                          Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" /> <!--Type-->
+                            <ColumnDefinition Width="120" /> <!--Amount-->
+                            <ColumnDefinition Width="120" /> <!--Date-->
+                            <ColumnDefinition Width="120" /> <!--Category-->
+                            <ColumnDefinition Width="120" /> <!--Tag-->
+                            <ColumnDefinition Width="120" /> <!--Method-->
+                            <ColumnDefinition Width="*" /> <!--Description-->
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding TypeName}"
+                               FontSize="16"
+                               Grid.Column="0"
+                               HorizontalOptions="Start"/>
+                        
                         <Label Text="{Binding Amount}"
-                               FontSize="16" />
-                        <Label Text="{Binding Description, StringFormat='Description: {0}'}"
-                               FontSize="14" />
-                        <Label Text="{Binding Time, StringFormat='Time: {0:dd/MM/yyyy}'}"
-                               FontSize="14" />
-                    </StackLayout>
+                               FontSize="16"
+                               Grid.Column="1"
+                               HorizontalOptions="Start" />
+
+                        <Label Text="{Binding Time, StringFormat='{0:dd.MM.yyyy}'}"
+                               FontSize="16"
+                               Grid.Column="2"
+                               HorizontalOptions="Start" />
+
+                        <Label Text="{Binding CategoryName}"
+                               FontSize="16"
+                               Grid.Column="3"
+                               HorizontalOptions="Start" />
+                        
+                        <Label Text="{Binding TagName}"
+                               FontSize="16"
+                               Grid.Column="4"
+                               HorizontalOptions="Start" />
+                        
+                        <Label Text="{Binding MethodName}"
+                               FontSize="16"
+                               Grid.Column="5"
+                               HorizontalOptions="Start" />
+                        
+                        <Label Text="{Binding Description}"
+                               FontSize="16"
+                               Grid.Column="6"
+                               HorizontalOptions="Start" />
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

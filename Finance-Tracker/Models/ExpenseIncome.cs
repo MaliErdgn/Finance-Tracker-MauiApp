@@ -12,5 +12,9 @@ namespace Finance_Tracker.Models
         public float Amount { get; set; }
         public DateTime Time { get; set; }
         public string Description{ get; set; }
+        public string TypeName { get; set; }
+        public string TagName { get; set; }
+        public string CategoryName { get; set; }
+        public string MethodName { get; set; }
     }
 }
