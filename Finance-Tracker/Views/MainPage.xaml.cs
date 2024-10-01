@@ -50,13 +50,24 @@ namespace Finance_Tracker.Views
                         }
 
                         //Bind the results to the listview
-                        expensesListView.ItemsSource = expenses;
+                        expensesCollectionView.ItemsSource = expenses;
                     }
                 }
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Failed to load data: {ex.Message}", "OK");
+            }
+        }
+
+        private void expensesCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedExpense = e.CurrentSelection.FirstOrDefault() as ExpenseIncome;
+
+            if (selectedExpense != null)
+            {
+                // Handle the selection (e.g., show details, delete, etc.)
+                DisplayAlert("Selected", $"You selected: {selectedExpense.Description}, Amount: {selectedExpense.Amount}", "OK");
             }
         }
     }

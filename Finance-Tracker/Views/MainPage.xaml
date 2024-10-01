@@ -1,21 +1,33 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Finance_Tracker.Views.MainPage">
-    <StackLayout Padding="20">
-        <Label Text="Expense/Income Dashboard" FontSize="24" HorizontalOptions="Center" />
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               Text="Expense/Income Dashboard"
+               FontSize="24"
+               HorizontalOptions="Center" />
 
-        <ListView x:Name="expensesListView">
-            <ListView.ItemTemplate>
+        <CollectionView x:Name="expensesCollectionView"
+                        SelectionMode="Single"
+                        SelectionChanged="expensesCollectionView_SelectionChanged"
+                        Grid.Row="1">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Vertical" Padding="10">
-                            <Label Text="{Binding Amount}" FontSize="16" />
-                            <Label Text="{Binding Description, StringFormat='Description: {0}'}" FontSize="14" />
-                            <Label Text="{Binding Time, StringFormat='Time: {0:dd/MM/yyyy}'}" FontSize="14" />
-                        </StackLayout>
-                    </ViewCell>
+                    <StackLayout Orientation="Vertical"
+                                 Padding="10">
+                        <Label Text="{Binding Amount}"
+                               FontSize="16" />
+                        <Label Text="{Binding Description, StringFormat='Description: {0}'}"
+                               FontSize="14" />
+                        <Label Text="{Binding Time, StringFormat='Time: {0:dd/MM/yyyy}'}"
+                               FontSize="14" />
+                    </StackLayout>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
