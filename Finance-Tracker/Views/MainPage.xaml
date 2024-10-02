@@ -23,21 +23,32 @@
                         SelectionMode="Single"
                         SelectionChanged="expensesCollectionView_SelectionChanged"
                         Grid.Row="3"
-                        Margin="0,20,0,0">
+                        Margin="0,20,0,0"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="All">
             <CollectionView.Header>
                 <Grid ColumnSpacing="20"
                       Padding="10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120" /> <!--Type-->
-                        <ColumnDefinition Width="120" /> <!--Amount-->
-                        <ColumnDefinition Width="120" /> <!--Date-->
-                        <ColumnDefinition Width="120" /> <!--Category-->
-                        <ColumnDefinition Width="120" /> <!--Tag-->
-                        <ColumnDefinition Width="120" /> <!--Method-->
-                        <ColumnDefinition Width="*" /> <!--Description-->
+                        <ColumnDefinition Width="120" />
+                        <!--Type-->
+                        <ColumnDefinition Width="120" />
+                        <!--Amount-->
+                        <ColumnDefinition Width="120" />
+                        <!--Date-->
+                        <ColumnDefinition Width="120" />
+                        <!--Category-->
+                        <ColumnDefinition Width="120" />
+                        <!--Tag-->
+                        <ColumnDefinition Width="120" />
+                        <!--Method-->
+                        <ColumnDefinition Width="*" />
+                        <!--Description-->
+
+
                     </Grid.ColumnDefinitions>
 
-                    <!--Type Header--> 
+                    <!--Type Header-->
                     <Grid Grid.Column="0">
                         <Label Text="Type"
                                FontSize="16"
@@ -47,7 +58,7 @@
                             <TapGestureRecognizer Tapped="OnTypeHeaderTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
-                    
+
                     <!--Amount Header-->
                     <Grid Grid.Column="1">
                         <Label Text="Amount"
@@ -58,7 +69,7 @@
                             <TapGestureRecognizer Tapped="OnAmountHeaderTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
-                    
+
                     <!--Date Header-->
                     <Grid Grid.Column="2">
                         <Label Text="Date"
@@ -69,7 +80,7 @@
                             <TapGestureRecognizer Tapped="OnDateHeaderTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
-                    
+
                     <!-- Category Header -->
                     <Grid Grid.Column="3">
                         <Label Text="Category"
@@ -80,8 +91,8 @@
                             <TapGestureRecognizer Tapped="OnCategoryHeaderTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
-                    
-                    
+
+
                     <!-- Tag Header -->
                     <Grid Grid.Column="4">
                         <Label Text="Tag"
@@ -92,8 +103,8 @@
                             <TapGestureRecognizer Tapped="OnTagHeaderTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
-                    
-                    
+
+
                     <!-- Method Header -->
                     <Grid Grid.Column="5">
                         <Label Text="Method"
@@ -104,8 +115,8 @@
                             <TapGestureRecognizer Tapped="OnMethodHeaderTapped" />
                         </Grid.GestureRecognizers>
                     </Grid>
-                    
-                    
+
+
                     <!-- Description Header -->
                     <Grid Grid.Column="6">
                         <Label Text="Description"
@@ -121,51 +132,103 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid ColumnSpacing="20"
-                          Padding="10">
+                          Padding="5">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120" /> <!--Type-->
-                            <ColumnDefinition Width="120" /> <!--Amount-->
-                            <ColumnDefinition Width="120" /> <!--Date-->
-                            <ColumnDefinition Width="120" /> <!--Category-->
-                            <ColumnDefinition Width="120" /> <!--Tag-->
-                            <ColumnDefinition Width="120" /> <!--Method-->
-                            <ColumnDefinition Width="*" /> <!--Description-->
+                            <ColumnDefinition Width="120" />
+                            <!--Type-->
+                            <ColumnDefinition Width="120" />
+                            <!--Amount-->
+                            <ColumnDefinition Width="120" />
+                            <!--Date-->
+                            <ColumnDefinition Width="120" />
+                            <!--Category-->
+                            <ColumnDefinition Width="120" />
+                            <!--Tag-->
+                            <ColumnDefinition Width="120" />
+                            <!--Method-->
+                            <ColumnDefinition Width="*" />
+                            <!--Description-->
+                            <ColumnDefinition Width="50" />
+                            <!--Edit Button-->
+                            <ColumnDefinition Width="50" />
+                            <!--Delete Button-->
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="2"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid"
+                                         Binding="{Binding TypeName}"
+                                         Value="Income">
+                                <Setter Property="BackgroundColor"
+                                        Value="LightGreen" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Grid"
+                                         Binding="{Binding TypeName}"
+                                         Value="Expense">
+                                <Setter Property="Background"
+                                        Value="LightCoral" />
+                            </DataTrigger>
+                        </Grid.Triggers>
 
                         <Label Text="{Binding TypeName}"
                                FontSize="16"
                                Grid.Column="0"
-                               HorizontalOptions="Start"/>
-                        
+                               HorizontalOptions="Start"
+                               Grid.Row="0" />
+
                         <Label Text="{Binding Amount}"
                                FontSize="16"
                                Grid.Column="1"
-                               HorizontalOptions="Start" />
+                               HorizontalOptions="Start"
+                               Grid.Row="0" />
 
                         <Label Text="{Binding Time, StringFormat='{0:dd.MM.yyyy}'}"
                                FontSize="16"
                                Grid.Column="2"
-                               HorizontalOptions="Start" />
+                               HorizontalOptions="Start"
+                               Grid.Row="0" />
 
                         <Label Text="{Binding CategoryName}"
                                FontSize="16"
                                Grid.Column="3"
-                               HorizontalOptions="Start" />
-                        
+                               HorizontalOptions="Start"
+                               Grid.Row="0" />
+
                         <Label Text="{Binding TagName}"
                                FontSize="16"
                                Grid.Column="4"
-                               HorizontalOptions="Start" />
-                        
+                               HorizontalOptions="Start"
+                               Grid.Row="0" />
+
                         <Label Text="{Binding MethodName}"
                                FontSize="16"
                                Grid.Column="5"
-                               HorizontalOptions="Start" />
-                        
+                               HorizontalOptions="Start"
+                               Grid.Row="0" />
+
                         <Label Text="{Binding Description}"
                                FontSize="16"
                                Grid.Column="6"
                                HorizontalOptions="Start" />
+                        <Button Grid.Column="7"
+                                BackgroundColor="Transparent"
+                                Padding="0"
+                                Clicked="OnEditButtonClicked">
+                            <Button.ImageSource>
+                                <FileImageSource File="edit_icon.png" />
+                            </Button.ImageSource>
+                        </Button>
+                        <Button Grid.Column="8"
+                                BackgroundColor="Transparent"
+                                Padding="0"
+                                Clicked="OnDeleteButtonClicked">
+                            <Button.ImageSource>
+                                <FileImageSource File="delete_icon.png" />
+                            </Button.ImageSource>
+                        </Button>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

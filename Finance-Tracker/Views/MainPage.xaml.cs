@@ -237,6 +237,31 @@ namespace Finance_Tracker.Views
             expensesCollectionView.ItemsSource = _expenses;
         }
         #endregion
+
+        private void OnEditButtonClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var expenseItem = button.BindingContext as ExpenseIncome;
+
+            // Implement the logic to navigate to the Edit page
+            // Or open a modal to edit the selected item
+            DisplayAlert("Edit", $"You clicked edit for {expenseItem.Description}", "OK");
+
+        }
+        private async void OnDeleteButtonClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var expenseItem = button.BindingContext as ExpenseIncome;
+
+            // Implement the logic to delete the selected item
+            // Confirm before deleting
+            bool delete = await DisplayAlert("Delete", $"Are you sure you want to delete {expenseItem.Description}?", "Yes", "No");
+            if (delete)
+            {
+                // Logic to remove the item from the data source
+                // and update the CollectionView
+            }
+        }
     }
 
 }
